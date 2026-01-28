@@ -1,0 +1,542 @@
+/* ==========================================
+   ARKNIGHTS ENDFIELD LOGIN PAGE
+   Matching Portfolio Design System
+   ========================================== */
+
+/* ==========================================
+   CSS VARIABLES (Same as Portfolio)
+   ========================================== */
+:root {
+  /* Colors */
+  --black: #0a0a0a;
+  --black-soft: #1a1a1a;
+  --white: #fafafa;
+  --white-soft: #e0e0e0;
+  --yellow: #ffd700;
+  --yellow-dim: #e6c200;
+  --yellow-pale: #fff9e6;
+  
+  /* Grays */
+  --gray-dark: #2a2a2a;
+  --gray: #404040;
+  --gray-light: #606060;
+  
+  /* Transparencies */
+  --border-color: rgba(250, 250, 250, 0.1);
+  --yellow-alpha-10: rgba(255, 215, 0, 0.1);
+  --yellow-alpha-20: rgba(255, 215, 0, 0.2);
+  --yellow-alpha-30: rgba(255, 215, 0, 0.3);
+  --white-alpha-60: rgba(250, 250, 250, 0.6);
+  --white-alpha-70: rgba(250, 250, 250, 0.7);
+  --white-alpha-80: rgba(250, 250, 250, 0.8);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-yellow: 0 4px 20px rgba(255, 215, 0, 0.3);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  
+  /* Typography */
+  --font-primary: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+}
+
+/* ==========================================
+   RESET & BASE
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--black);
+  color: var(--white);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================
+   BACKGROUND EFFECTS
+   ========================================== */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(250, 250, 250, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 250, 250, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.5;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -250px;
+  right: -250px;
+  animation: pulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+/* Diagonal lines decoration */
+.diagonal-lines {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(250, 250, 250, 0.02) 20px,
+      rgba(250, 250, 250, 0.02) 21px
+    );
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ==========================================
+   LOGIN CONTAINER
+   ========================================== */
+.login-class {
+  background: var(--gray-dark);
+  padding: var(--spacing-lg) 2.5rem;
+  width: 420px;
+  max-width: 90%;
+  border: 1px solid var(--border-color);
+  clip-path: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 10;
+  transition: all var(--transition-smooth);
+}
+
+.login-class:hover {
+  border-color: var(--yellow);
+  box-shadow: 
+    var(--shadow-lg),
+    0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+/* Corner accents */
+.login-class::before,
+.login-class::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--yellow);
+}
+
+.login-class::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.login-class::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ==========================================
+   TITLE STYLING
+   ========================================== */
+.judul-login {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: var(--spacing-lg);
+  color: var(--yellow);
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+.judul-login::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--yellow);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* ==========================================
+   FORM ELEMENTS
+   ========================================== */
+form {
+  position: relative;
+}
+
+label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 15px;
+}
+
+label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 2px;
+  background: var(--yellow);
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  background: rgba(10, 10, 10, 0.6);
+  color: var(--white);
+  font-size: 1rem;
+  font-family: var(--font-primary);
+  transition: all var(--transition-smooth);
+  outline: none;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: var(--yellow);
+  background: rgba(10, 10, 10, 0.9);
+  box-shadow: 
+    0 0 0 3px var(--yellow-alpha-10),
+    inset 0 0 20px rgba(255, 215, 0, 0.05);
+}
+
+input::placeholder {
+  color: var(--white-alpha-60);
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   LOGIN BUTTON
+   ========================================== */
+.login-button {
+  width: 100%;
+  padding: var(--spacing-sm) 2.5rem;
+  margin-top: var(--spacing-sm);
+  background: var(--yellow);
+  color: var(--black);
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  box-shadow: var(--shadow-yellow);
+}
+
+/* Shine effect */
+.login-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s;
+}
+
+.login-button:hover::before {
+  left: 100%;
+}
+
+.login-button:hover {
+  background: var(--yellow-dim);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 25px rgba(255, 215, 0, 0.5),
+    0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.login-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 15px rgba(255, 215, 0, 0.4);
+}
+
+/* ==========================================
+   ERROR MESSAGE
+   ========================================== */
+.error {
+  color: #ff4757;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  background: rgba(255, 71, 87, 0.1);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  border-radius: 2px;
+  display: none;
+  animation: slideDown 0.3s ease;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+
+.error.show {
+  display: block;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   DECORATIVE ELEMENTS
+   ========================================== */
+.deco-box {
+  position: absolute;
+  border: 1px solid var(--yellow-alpha-20);
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  pointer-events: none;
+}
+
+.deco-box-1 {
+  top: 10%;
+  left: 5%;
+  width: 100px;
+  height: 100px;
+  animation: float 6s ease-in-out infinite;
+}
+
+.deco-box-2 {
+  bottom: 15%;
+  right: 8%;
+  width: 80px;
+  height: 80px;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+    opacity: 0.3;
+  }
+  50% { 
+    transform: translateY(-20px) rotate(5deg); 
+    opacity: 0.6;
+  }
+}
+
+.deco-line {
+  position: absolute;
+  background: var(--yellow-alpha-20);
+  pointer-events: none;
+}
+
+.deco-line-1 {
+  top: 25%;
+  right: 12%;
+  width: 2px;
+  height: 150px;
+  animation: slideDown 3s ease-in-out infinite;
+}
+
+.deco-line-2 {
+  bottom: 30%;
+  left: 8%;
+  width: 120px;
+  height: 2px;
+  animation: slideRight 3s ease-in-out infinite;
+}
+
+@keyframes slideDown {
+  0%, 100% { 
+    transform: translateY(0); 
+    opacity: 0.3; 
+  }
+  50% { 
+    transform: translateY(20px); 
+    opacity: 0.7; 
+  }
+}
+
+@keyframes slideRight {
+  0%, 100% { 
+    transform: translateX(0); 
+    opacity: 0.3; 
+  }
+  50% { 
+    transform: translateX(20px); 
+    opacity: 0.7; 
+  }
+}
+
+.floating-text {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--yellow-alpha-20);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.floating-text-1 {
+  top: 20%;
+  right: 10%;
+  animation: float 5s ease-in-out infinite;
+}
+
+.floating-text-2 {
+  bottom: 25%;
+  left: 15%;
+  animation: float 7s ease-in-out infinite reverse;
+}
+
+/* ==========================================
+   RESPONSIVE - TABLET
+   ========================================== */
+@media (max-width: 768px) {
+  .login-class {
+    width: 90%;
+    padding: var(--spacing-lg) var(--spacing-lg);
+  }
+
+  .judul-login {
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+  }
+
+  .deco-box,
+  .deco-line,
+  .floating-text {
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE - MOBILE
+   ========================================== */
+@media (max-width: 480px) {
+  body::after {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    right: -150px;
+  }
+
+  .login-class {
+    width: 95%;
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+
+  .judul-login {
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+  }
+
+  label {
+    font-size: 0.7rem;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 0.8rem var(--spacing-sm);
+    font-size: 0.95rem;
+  }
+
+  .login-button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.95rem;
+  }
+
+  .deco-box,
+  .deco-line,
+  .floating-text,
+  .diagonal-lines {
+    display: none;
+  }
+}
+
+/* ==========================================
+   UTILITIES
+   ========================================== */
+.hidden {
+  display: none;
+}
+
+.text-center {
+  text-align: center;
+}
